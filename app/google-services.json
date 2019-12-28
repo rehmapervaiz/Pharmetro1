@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1034605552189",
+    "firebase_url": "https://pharmetro-c45b6.firebaseio.com",
+    "project_id": "pharmetro-c45b6",
+    "storage_bucket": "pharmetro-c45b6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1034605552189:android:c76a92d901e73b0f260054",
+        "android_client_info": {
+          "package_name": "com.example.pharmetroclient"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1034605552189-t7nfkni11m1t4rdc5tgl33cv18em3rs4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJFNPJLn-vtNP7JNLUn2QEZaMBVIYW_VI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1034605552189-t7nfkni11m1t4rdc5tgl33cv18em3rs4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
