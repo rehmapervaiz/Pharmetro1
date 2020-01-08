@@ -116,8 +116,11 @@ public class CategoryActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         //Handle action bar items here those are search icon, cart icon, notification icon
         int id = item.getItemId();
-
-        if (id == R.id.main_search_icon) {
+        if (id == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        else if (id == R.id.main_search_icon) {
             return true;
         }
 

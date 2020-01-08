@@ -206,7 +206,7 @@ public class SignInFragment extends Fragment {
         }
     }
     private void mainIntent(){
-        Intent mainIntent = new Intent(getActivity(),MainActivity.class);
+        Intent mainIntent = new Intent(getActivity(),MapActivity.class);
         startActivity(mainIntent);
         getActivity().finish();
     }

@@ -1,5 +1,6 @@
 package com.example.pharmetroclient;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -137,11 +138,12 @@ public class ProductDetailsActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
-            finish();
+            onBackPressed();
             return true;
         } else if (id == R.id.main_search_icon) {
             return true;
         } else if (id == R.id.main_cart_icon) {
+            startActivity(new Intent(ProductDetailsActivity.this, OrderDetailsActivity.class));
             return true;
         }
 
