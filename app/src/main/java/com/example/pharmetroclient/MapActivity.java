@@ -159,58 +159,58 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             }
         });
 
-//        materialSearchBar.setSuggstionsClickListener(new SuggestionsAdapter.OnItemViewClickListener() {
-//            @Override
-//            public void OnItemClickListener(int position, View v) {
-//                if (position >= predictionList.size()) {
-//                    return;
-//                }
-//                AutocompletePrediction selectedPrediction = predictionList.get(position);
-//                String suggestion = materialSearchBar.getLastSuggestions().get(position).toString();
-//                materialSearchBar.setText(suggestion);
-//
-//                new Handler().postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        materialSearchBar.clearSuggestions();
-//                    }
-//                }, 1000);
-//                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-//                if (imm != null)
-//                    imm.hideSoftInputFromWindow(materialSearchBar.getWindowToken(), InputMethodManager.HIDE_IMPLICIT_ONLY);
-//                final String placeId = selectedPrediction.getPlaceId();
-//                List<Place.Field> placeFields = Arrays.asList(Place.Field.LAT_LNG);
-//
-//                FetchPlaceRequest fetchPlaceRequest = FetchPlaceRequest.builder(placeId, placeFields).build();
-//                placesClient.fetchPlace(fetchPlaceRequest).addOnSuccessListener(new OnSuccessListener<FetchPlaceResponse>() {
-//                    @Override
-//                    public void onSuccess(FetchPlaceResponse fetchPlaceResponse) {
-//                        Place place = fetchPlaceResponse.getPlace();
-//                        Log.i("mytag", "Place found: " + place.getName());
-//                        LatLng latLngOfPlace = place.getLatLng();
-//                        if (latLngOfPlace != null) {
-//                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngOfPlace, DEFAULT_ZOOM));
-//                        }
-//                    }
-//                }).addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        if (e instanceof ApiException) {
-//                            ApiException apiException = (ApiException) e;
-//                            apiException.printStackTrace();
-//                            int statusCode = apiException.getStatusCode();
-//                            Log.i("mytag", "place not found: " + e.getMessage());
-//                            Log.i("mytag", "status code: " + statusCode);
-//                        }
-//                    }
-//                });
-//            }
-//
-//            @Override
-//            public void OnItemDeleteListener(int position, View v) {
-//
-//            }
-//        });
+        materialSearchBar.setSuggestionsClickListener(new SuggestionsAdapter.OnItemViewClickListener() {
+            @Override
+            public void OnItemClickListener(int position, View v) {
+                if (position >= predictionList.size()) {
+                    return;
+                }
+                AutocompletePrediction selectedPrediction = predictionList.get(position);
+                String suggestion = materialSearchBar.getLastSuggestions().get(position).toString();
+                materialSearchBar.setText(suggestion);
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        materialSearchBar.clearSuggestions();
+                    }
+                }, 1000);
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                if (imm != null)
+                    imm.hideSoftInputFromWindow(materialSearchBar.getWindowToken(), InputMethodManager.HIDE_IMPLICIT_ONLY);
+                final String placeId = selectedPrediction.getPlaceId();
+                List<Place.Field> placeFields = Arrays.asList(Place.Field.LAT_LNG);
+
+                FetchPlaceRequest fetchPlaceRequest = FetchPlaceRequest.builder(placeId, placeFields).build();
+                placesClient.fetchPlace(fetchPlaceRequest).addOnSuccessListener(new OnSuccessListener<FetchPlaceResponse>() {
+                    @Override
+                    public void onSuccess(FetchPlaceResponse fetchPlaceResponse) {
+                        Place place = fetchPlaceResponse.getPlace();
+                        Log.i("mytag", "Place found: " + place.getName());
+                        LatLng latLngOfPlace = place.getLatLng();
+                        if (latLngOfPlace != null) {
+                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngOfPlace, DEFAULT_ZOOM));
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        if (e instanceof ApiException) {
+                            ApiException apiException = (ApiException) e;
+                            apiException.printStackTrace();
+                            int statusCode = apiException.getStatusCode();
+                            Log.i("mytag", "place not found: " + e.getMessage());
+                            Log.i("mytag", "status code: " + statusCode);
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void OnItemDeleteListener(int position, View v) {
+
+            }
+        });
 //
         btnFind.setOnClickListener(new View.OnClickListener() {
             @Override
