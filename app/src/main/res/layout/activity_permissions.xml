@@ -7,7 +7,7 @@
     tools:context=".PermissionsActivity"
     android:padding="32dp">
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -34,7 +34,7 @@
             android:layout_marginTop="36dp"
             android:text="Pharmetro needs permission to acces device location to provide required services. Please allow the permission"/>
 
-    </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <Button
         android:id="@+id/btn_grant"
