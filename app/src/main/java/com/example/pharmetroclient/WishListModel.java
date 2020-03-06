@@ -10,7 +10,7 @@ public class WishListModel {
     private String paymentMethod;
     private String productTitle;
 
-    public WishListModel(int productImage, int totalRatings, int freeCoupens, String rating, String productPrice, String cuttedPrice, String paymentMethod, String productTitle) {
+    public WishListModel(int productImage, String productTitle, int freeCoupens, String rating, int totalRatings, String productPrice, String cuttedPrice, String paymentMethod) {
         this.productImage = productImage;
         this.totalRatings = totalRatings;
         this.freeCoupens = freeCoupens;
