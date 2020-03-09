@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final int CART_FRAGMENT = 1;
     private static final int ORDERS_FRAGMENT = 2;
     private static final int WISHLIST_FRAGMENT = 3;
+    private static final int ACCOUNT_FRAGMENT = 5;
 
     private FrameLayout frameLayout;
     private ImageView actionBarLogo;
@@ -133,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             gotoFragment("MY WISHLIST", new MyWishlistFragment(),WISHLIST_FRAGMENT);
         }else if(id==R.id.nav_my_account){
-
+            gotoFragment("My Account",new MyAccountFragement() ,ACCOUNT_FRAGMENT);
         }else if(id==R.id.nav_sign_out){
             return true;
         }
