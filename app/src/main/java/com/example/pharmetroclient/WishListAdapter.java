@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,7 +30,18 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
+
+        int resource = wishListModelList.get(position).getProductImage();
+        String title = wishListModelList.get(position).getProductTitle();
+        int freeCoupens = wishListModelList.get(position).getFreeCoupens();
+        String rating = wishListModelList.get(position).getRating();
+        int totalRatings = wishListModelList.get(position).getTotalRatings();
+        String productPrice = wishListModelList.get(position).getProductPrice();
+        String  cuttedPrice = wishListModelList.get(position).getCuttedPrice();
+        String paymentMethod = wishListModelList.get(position).getPaymentMethod();
+
+        viewHolder.setData(resource,title,freeCoupens,rating,totalRatings,productPrice,cuttedPrice,paymentMethod);
 
     }
 
@@ -66,7 +78,36 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ViewHo
             productPrice = itemView.findViewById(R.id.product_price);
             cuttedPrice = itemView.findViewById(R.id.cutted_price);
             paymentMethod = itemView.findViewById(R.id.payment_method);
-           // deleteBtn = itemView.findViewById(R.id.delete_btn);
+            deleteBtn = itemView.findViewById(R.id.delete_btn);
+        }
+
+        private void setData(int resource, String title, int freeCoupensNo, String averageRate, int totalRatingsNo, String price, String cuttedPriceValue, String payMethod){
+            productImage.setImageResource(resource);
+            productTitle.setText(title);
+            if (freeCoupensNo != 0){
+                coupenIcon.setVisibility(View.VISIBLE);
+                if(freeCoupensNo == 1) {
+                    freeCoupens.setText("free " + freeCoupensNo + "coupen");
+                }else {
+                    freeCoupens.setText("free " + freeCoupensNo + "coupens");
+                }
+            }else {
+                coupenIcon.setVisibility(View.INVISIBLE);
+                freeCoupens.setVisibility(View.INVISIBLE);
+            }
+
+            rating.setText(averageRate);
+            totalRatings.setText(totalRatingsNo + "(ratings)");
+            productPrice.setText(price);
+            cuttedPrice.setText(cuttedPriceValue);
+            paymentMethod.setText(payMethod);
+
+            deleteBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(itemView.getContext(),"delete",Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 }
