@@ -1,9 +1,12 @@
 package com.example.pharmetroclient;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -28,19 +31,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final int CART_FRAGMENT = 1;
     private static final int ORDERS_FRAGMENT = 2;
     private static final int WISHLIST_FRAGMENT = 3;
+    private static final int REWARDS_FRAGMENT = 4;
+
 
     private FrameLayout frameLayout;
     private ImageView actionBarLogo;
     private static int currentFragment = -1;
     private NavigationView navigationView;
+    private Toolbar toolbar;
 
+    private Window window;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        //Toolbar toolbar = findViewById(R.id.toolbar);
         actionBarLogo = findViewById(R.id.actionbar_logo);
         setSupportActionBar(toolbar);
+
+        window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         getSupportActionBar().setDisplayShowTitleEnabled(false); /*basically title jo likha how ata hai applicaton ka wo remove kiya hai */
 
         //FloatingActionButton fab = findViewById(R.id.fab);
@@ -125,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         else if(id==R.id.nav_my_orders){
             gotoFragment("MY ORDERS",new MyOrdersFragment(),ORDERS_FRAGMENT);
         }else if(id==R.id.nav_my_rewards){
-
+            gotoFragment("My Rewards", new MyRewardsFragment(),REWARDS_FRAGMENT);
         }else if(id==R.id.nav_my_cart){
             gotoFragment("MY CART",new MyCartFragment(),CART_FRAGMENT);
 
@@ -151,6 +161,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void setFragment(Fragment fragment,int fragmentNo) {
         if (fragmentNo != currentFragment) {
+            if(fragmentNo == REWARDS_FRAGMENT){
+                window.setStatusBarColor(Color.parseColor("#5B04B1"));
+                toolbar.setBackgroundColor(Color.parseColor("#5B04B1"));
+
+            }else{
+                window.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
+                toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            }
             currentFragment = fragmentNo;
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(frameLayout.getId(), fragment);
