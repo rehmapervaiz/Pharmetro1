@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -34,7 +35,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     private  LinearLayout rateNowContainer;
     /////////////////// Rating layout
-
+    private Button buyNowBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +51,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         addToWishlisttBtn = findViewById(R.id.add_to_wishlist_btn);
         productDetailsViewpager=findViewById(R.id.product_details_viewpager);
         productDetailsTablayout=findViewById(R.id.product_details_tablayout);
+        buyNowBtn = findViewById(R.id.buy_now_btn);
 
         List<Integer> productImages = new ArrayList<>();
         productImages.add(R.drawable.panadol);
@@ -112,6 +114,14 @@ public class ProductDetailsActivity extends AppCompatActivity {
             });
         }
         /////////////////// Rating layout
+
+        buyNowBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent deliveryIntent = new Intent(ProductDetailsActivity.this,DeliveryActivity.class);
+                startActivity(deliveryIntent);
+            }
+        });
 
     }
 
