@@ -39,14 +39,14 @@
         layout="@layout/shipping_details_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintBottom_toTopOf="@+id/add_new_address_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
 
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/linearLayout"
+        android:id="@+id/add_new_address_btn"
         android:layout_width="0dp"
 
         android:layout_height="56dp"
