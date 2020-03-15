@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -112,10 +113,11 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
         private ViewPager bannerSliderViewPager;
         private List<SliderModel> sliderModelList;
-        private int currentPage = 2;
+        private int currentPage;
         private Timer timer;
         final private long DELAY_TIME = 3000;
         final private long PERIOD_TIME = 3000;
+        private List<SliderModel> arrangedList;
 
 
         public BannerSliderViewholder(@NonNull View itemView) {
@@ -126,6 +128,16 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
 
         private void setBannerSliderViewPager(final List<SliderModel> sliderModelList) {
+            currentPage = 2;
+            if(timer != null){
+                timer.cancel();
+            }
+
+            arrangedList = new ArrayList<>();
+            for(int x=0 ; x  <sliderModelList.size();x++){
+                arrangedList.set(x,sliderModelList.get(x));
+            }
+
             SliderAdapter sliderAdapter = new SliderAdapter(sliderModelList);
             bannerSliderViewPager.setAdapter(sliderAdapter);
             bannerSliderViewPager.setClipToPadding(false);
