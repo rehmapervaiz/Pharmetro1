@@ -96,7 +96,7 @@ public class AddressesAdapter extends RecyclerView.Adapter<AddressesAdapter.View
 
             }else if(MODE == MANAGE_ADDRESS){
                 optionContainer.setVisibility(View.GONE);
-                icon.setImageResource(R.drawable.verticla_dots);
+                icon.setImageResource(R.drawable.ic_dots_vertical_black_48dp);
                 icon.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

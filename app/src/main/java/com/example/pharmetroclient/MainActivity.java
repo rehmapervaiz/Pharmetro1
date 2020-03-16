@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             gotoFragment("MY WISHLIST", new MyWishlistFragment(),WISHLIST_FRAGMENT);
         }else if(id==R.id.nav_my_account){
-            gotoFragment("My Account",new MyAccountFragement() ,ACCOUNT_FRAGMENT);
+            gotoFragment("My Account",new MyAccountFragment() ,ACCOUNT_FRAGMENT);
         }else if(id==R.id.nav_sign_out){
             return true;
         }

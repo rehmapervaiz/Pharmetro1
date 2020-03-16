@@ -260,9 +260,9 @@ public class HomePageAdapter extends RecyclerView.Adapter {
                 horizontalLayoutViewAllButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent ViewAllIntent = new Intent(itemView.getContext(),ViewAllActivity.class);
-                        ViewAllIntent.putExtra("layout_coded",0);
-                        itemView.getContext().startActivity(ViewAllIntent);
+                  //      Intent ViewAllIntent = new Intent(itemView.getContext(),ViewAllActivity.class);
+                  //      ViewAllIntent.putExtra("layout_coded",0);
+                  //      itemView.getContext().startActivity(ViewAllIntent);
                     }
                 });
 
@@ -319,14 +319,14 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
             }
 
-            gridLayoutViewAllButton.setOnClickListener(new View.OnClickListener() {
+          /*  gridLayoutViewAllButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent ViewAllIntent = new Intent(itemView.getContext(),ViewAllActivity.class);
                     ViewAllIntent.putExtra("layout_coded",1);
                     itemView.getContext().startActivity(ViewAllIntent);
                 }
-            });
+            });*/
         }
     }
 
