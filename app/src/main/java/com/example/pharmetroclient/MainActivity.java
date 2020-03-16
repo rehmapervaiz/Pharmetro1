@@ -18,6 +18,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.pharmetroclient.ui.home.HomeFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -84,6 +85,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if(drawer.isDrawerOpen(GravityCompat.START)){
+            drawer.closeDrawer(GravityCompat.START);
+        }else {
+            if(currentFragment == HOME_FRAGMENT){
+                currentFragment = -1;
+                super.onBackPressed();
+            }else {
+                actionBarLogo.setVisibility(View.VISIBLE);
+                invalidateOptionsMenu();
+                setFragment(new HomeFragment(),HOME_FRAGMENT);
+                navigationView.getMenu().getItem(0).setChecked(true);
+            }
+        }
     }
 
     @Override

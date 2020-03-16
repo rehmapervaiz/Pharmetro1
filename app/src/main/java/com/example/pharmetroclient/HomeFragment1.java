@@ -122,18 +122,24 @@ public class HomeFragment1 extends Fragment {
         homePageModelList.add(new HomePageModel(2,"Deals of the Day",horizontalProductScrollModelList));
         homePageModelList.add(new HomePageModel(3,"Products that you are looking for!",horizontalProductScrollModelList));
         homePageModelList.add(new HomePageModel(3,"Hurry Up!",horizontalProductScrollModelList));
+
+        homePageModelList.add(new HomePageModel(1,R.drawable.banner,"#000000"));
+        homePageModelList.add(new HomePageModel(2,"Deals of the Day",horizontalProductScrollModelList));
+        homePageModelList.add(new HomePageModel(3,"Products that you are looking for!",horizontalProductScrollModelList));
+        homePageModelList.add(new HomePageModel(3,"Hurry Up!",horizontalProductScrollModelList));
+
+        homePageModelList.add(new HomePageModel(1,R.drawable.banner,"#000000"));
+        homePageModelList.add(new HomePageModel(2,"Deals of the Day",horizontalProductScrollModelList));
+        homePageModelList.add(new HomePageModel(3,"Products that you are looking for!",horizontalProductScrollModelList));
+        homePageModelList.add(new HomePageModel(3,"Hurry Up!",horizontalProductScrollModelList));
+
       //  homePageModelList.add(new HomePageModel(1,R.drawable.banner,"#ff0000"));
 
         //homePageModelList.add(new HomePageModel(1,R.drawable.banner,"#000ff0"));
 
-
-
-
-
         HomePageAdapter adapter=new HomePageAdapter(homePageModelList);
         testing.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-
 
         ////////////Testing
         return view;
