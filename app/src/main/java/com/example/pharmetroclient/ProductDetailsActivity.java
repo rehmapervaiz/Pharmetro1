@@ -21,6 +21,8 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.pharmetroclient.MainActivity.showCart;
+
 public class ProductDetailsActivity extends AppCompatActivity {
 
     private ViewPager productImagesViewPager;
@@ -153,7 +155,10 @@ public class ProductDetailsActivity extends AppCompatActivity {
         } else if (id == R.id.main_search_icon) {
             return true;
         } else if (id == R.id.main_cart_icon) {
-            startActivity(new Intent(ProductDetailsActivity.this, OrderDetailsActivity.class));
+            Intent cartIntent = new Intent(ProductDetailsActivity.this,MainActivity.class);
+            showCart = true;
+            startActivity(cartIntent);
+           // startActivity(new Intent(ProductDetailsActivity.this, OrderDetailsActivity.class));
             return true;
         }
 
