@@ -13,15 +13,25 @@ import androidx.recyclerview.widget.RecyclerView;
 public class MyRewardsAdapter extends RecyclerView.Adapter<MyRewardsAdapter.Viewholder> {
 
     private List<RewardModel> rewardModelList;
+    private boolean useMiniLayout=false;
 
-    public MyRewardsAdapter(List<RewardModel> rewardModelList) {
+    public MyRewardsAdapter(List<RewardModel> rewardModelList,boolean useMiniLayout) {
         this.rewardModelList = rewardModelList;
+        this.useMiniLayout=useMiniLayout;
     }
 
     @NonNull
     @Override
     public Viewholder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.rewards_item_layout,viewGroup,false);
+        View view;
+        if(useMiniLayout) {
+          view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.mini_rewards_item_layout, viewGroup, false);
+
+        }else{
+
+            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.rewards_item_layout, viewGroup, false);
+
+        }
         return new Viewholder(view);
     }
 
@@ -53,10 +63,28 @@ public class MyRewardsAdapter extends RecyclerView.Adapter<MyRewardsAdapter.View
             coupenBody = itemView.findViewById(R.id.coupen_body);
 
         }
-        private void setData(String title,String date,String body){
+        private void setData(final String title, final String date, final String body){
             coupenTitle.setText(title);
             coupenExpiryDate.setText(date);
             coupenBody.setText(body);
+
+            if(useMiniLayout){
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ProductDetailsActivity.couponTitle.setText(title);
+                        ProductDetailsActivity.couponExpiryDate.setText(date);
+                        ProductDetailsActivity.couponBody.setText(body);
+
+                        ProductDetailsActivity.showDialogRecyclerView();
+
+
+
+                    }
+                });
+
+
+            }
         }
     }
 
