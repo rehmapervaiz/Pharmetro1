@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.PagerAdapter;
@@ -32,7 +35,7 @@ public class SliderAdapter extends PagerAdapter {
         ImageView banner=view.findViewById(R.id.banner_Slide);
 
     //banner ko asay access kiya ha
-        banner.setImageResource(sliderModelList.get(position).getBanner());
+        Glide.with(container.getContext()).load(sliderModelList.get(position).getBanner()).apply(new RequestOptions().placeholder(R.drawable.home_icon)).into(banner);
         container.addView(view,0);
         return view;
 

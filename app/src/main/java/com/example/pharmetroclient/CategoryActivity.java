@@ -28,25 +28,6 @@ public class CategoryActivity extends AppCompatActivity {
 
         categoryRecyclerView=findViewById(R.id.category_recyclerview);
 
-    ////////////////////banner slider
-        List<SliderModel>sliderModelList=new ArrayList<>();
-
-        sliderModelList.add(new SliderModel(R.drawable.ic_menu_gallery,"#077EA4"));
-        sliderModelList.add(new SliderModel(R.drawable.ic_menu_send,"#077EA4"));
-        sliderModelList.add(new SliderModel(R.drawable.banner,"#077EA4"));
-
-        sliderModelList.add(new SliderModel(R.drawable.ic_add_circle_outline_blue_24dp,"#077EA4"));
-        sliderModelList.add(new SliderModel(R.drawable.ic_menu_camera,"#077EA4"));
-        sliderModelList.add(new SliderModel(R.drawable.logo,"#077EA4"));
-        sliderModelList.add(new SliderModel(R.drawable.ic_menu_gallery,"#077EA4"));
-
-        sliderModelList.add(new SliderModel(R.drawable.ic_menu_send,"#077EA4"));
-        sliderModelList.add(new SliderModel(R.drawable.banner,"#077EA4"));
-        sliderModelList.add(new SliderModel(R.drawable.ic_add_circle_outline_blue_24dp,"#077EA4"));
-
-
-
-//Banner Slider
 
 
         //Strip Part
@@ -83,14 +64,6 @@ public class CategoryActivity extends AppCompatActivity {
         categoryRecyclerView.setLayoutManager(testingLayoutManager);
 
         List<HomePageModel>homePageModelList=new ArrayList<>();
-        homePageModelList.add(new HomePageModel(0,sliderModelList));
-        homePageModelList.add(new HomePageModel(1,R.drawable.banner,"#000000"));
-        homePageModelList.add(new HomePageModel(2,"Deals of the Day",horizontalProductScrollModelList));
-        homePageModelList.add(new HomePageModel(3,"Deals of the Day",horizontalProductScrollModelList));
-        homePageModelList.add(new HomePageModel(3,"Deals of the Day",horizontalProductScrollModelList));
-        homePageModelList.add(new HomePageModel(1,R.drawable.banner,"#ff0000"));
-        homePageModelList.add(new HomePageModel(1,R.drawable.banner,"#000ff0"));
-
 
 
 
