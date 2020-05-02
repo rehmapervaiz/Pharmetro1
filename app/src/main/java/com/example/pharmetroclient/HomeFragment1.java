@@ -37,6 +37,8 @@ public class HomeFragment1 extends Fragment {
     private CategoryAdapter categoryAdapter;
     private FirebaseFirestore firebaseFirestore;
     private HomePageAdapter adapter;
+    List<CategoryModel> categoryModelList;
+
 
 
     @Override
@@ -54,6 +56,29 @@ public class HomeFragment1 extends Fragment {
         categoryRecyclerView.setLayoutManager(layoutManager);
 
         //////////////////////////////
+        categoryModelList = new ArrayList<CategoryModel>();
+        categoryAdapter = new CategoryAdapter(categoryModelList,this.getActivity());
+        categoryRecyclerView.setAdapter(categoryAdapter);
+
+
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        firebaseFirestore.collection("CATEGORIES").orderBy("index").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            for(QueryDocumentSnapshot documentSnapshot : task.getResult()){
+                                categoryModelList.add(new CategoryModel(documentSnapshot.get("icon").toString(),documentSnapshot.get("categoryName").toString()));
+                            }
+                            categoryAdapter.notifyDataSetChanged();
+
+                        }else {
+                            String error = task.getException().getMessage();
+                            Toast.makeText(getContext(),error,Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
         /*categoryModelList = new ArrayList<CategoryModel>();
         categoryAdapter = new CategoryAdapter(categoryModelList);
         categoryRecyclerView.setAdapter(categoryAdapter);
@@ -78,7 +103,7 @@ public class HomeFragment1 extends Fragment {
                 });
 */
 
-        final List<CategoryModel>categoryModelList=new ArrayList<CategoryModel>();
+       /* final List<CategoryModel>categoryModelList=new ArrayList<CategoryModel>();
         categoryModelList.add(new CategoryModel("link","Home"));
         categoryModelList.add(new CategoryModel("link","Painkiller"));
         categoryModelList.add(new CategoryModel("link","Vitamins"));
@@ -91,7 +116,7 @@ public class HomeFragment1 extends Fragment {
         categoryAdapter= new CategoryAdapter(categoryModelList,getContext());
         categoryRecyclerView.setAdapter(categoryAdapter);
         categoryAdapter.notifyDataSetChanged();
-
+*/
 
 
 
