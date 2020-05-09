@@ -34,7 +34,10 @@ public class HomeFragment1 extends Fragment {
 
     private RecyclerView homePageRecyclerView;
     private RecyclerView categoryRecyclerView;
+
+    List<CategoryModel> categoryModelList;
     private CategoryAdapter categoryAdapter;
+
     private FirebaseFirestore firebaseFirestore;
     private HomePageAdapter adapter;
 
@@ -54,8 +57,8 @@ public class HomeFragment1 extends Fragment {
         categoryRecyclerView.setLayoutManager(layoutManager);
 
         //////////////////////////////
-        /*categoryModelList = new ArrayList<CategoryModel>();
-        categoryAdapter = new CategoryAdapter(categoryModelList);
+        categoryModelList = new ArrayList<CategoryModel>();
+        categoryAdapter = new CategoryAdapter(categoryModelList,this.getActivity());
         categoryRecyclerView.setAdapter(categoryAdapter);
 
 
@@ -66,7 +69,7 @@ public class HomeFragment1 extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful()){
                             for(QueryDocumentSnapshot documentSnapshot : task.getResult()){
-                                categoryModelList.add(new CategoryModel(documentSnapshot.get("icon").toString(),documentSnapshot.get("").toString()));
+                                categoryModelList.add(new CategoryModel(documentSnapshot.get("icon").toString(),documentSnapshot.get("categoryName").toString()));
                             }
                             categoryAdapter.notifyDataSetChanged();
 
@@ -76,8 +79,8 @@ public class HomeFragment1 extends Fragment {
                         }
                     }
                 });
-*/
 
+/*
         final List<CategoryModel>categoryModelList=new ArrayList<CategoryModel>();
         categoryModelList.add(new CategoryModel("link","Home"));
         categoryModelList.add(new CategoryModel("link","Painkiller"));
@@ -104,25 +107,40 @@ public class HomeFragment1 extends Fragment {
         //Horizontal Layout
 
 
-        //List<HorizontalProductScrollModel> horizontalProductScrollModelList=new ArrayList<>();
-        //horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.med1,"Orthix ","500mg Film-Coated Tablets" ,"Rs. 320"));
-        //horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.med2,"Ibuprofen ","200mg" ,"Rs.420"));
-        //horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.panadol,"Panadol ","500mg" ,"Rs.700"));
-        //horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.med3,"Advil ","200mg" ,"Rs.1120"));
-        //horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.med4,"VoltrenT ","25mg" ,"Rs.70"));
-        //horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.med5,"BioLine ","500mg" ,"Rs.120"));
-        //horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.med6,"Omega 3 ","500mg" ,"Rs.700"));
-        //horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.med7,"New Chapter ","25mg" ,"Rs.70"));
-        //horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.med8,"Collagen ","500mg" ,"Rs.620"));
-        //horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.panadol,"Panadol ","500mg" ,"Rs.700"));
+        List<HorizontalProductScrollModel> horizontalProductScrollModelList=new ArrayList<>();
+        horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.med1,"Orthix ","500mg Film-Coated Tablets" ,"Rs. 320"));
+        horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.med2,"Ibuprofen ","200mg" ,"Rs.420"));
+        horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.panadol,"Panadol ","500mg" ,"Rs.700"));
+        horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.med3,"Advil ","200mg" ,"Rs.1120"));
+        horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.med4,"VoltrenT ","25mg" ,"Rs.70"));
+        horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.med5,"BioLine ","500mg" ,"Rs.120"));
+        horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.med6,"Omega 3 ","500mg" ,"Rs.700"));
+        horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.med7,"New Chapter ","25mg" ,"Rs.70"));
+        horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.med8,"Collagen ","500mg" ,"Rs.620"));
+        horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.panadol,"Panadol ","500mg" ,"Rs.700"));
 
         //Horizontal Layout
 
 
-        /////////////Grid View
+        /////////////Grid View*/
 
         /////////////Grid View
+/*        List<HomePageModel> homePageModelList=new ArrayList<>();
+        //homePageModelList.add(new HomePageModel(0,sliderModelList));
+      //  homePageModelList.add(new HomePageModel(1,R.drawable.banner,"#000000"));
+        homePageModelList.add(new HomePageModel(2,"Deals of the Day",horizontalProductScrollModelList));
+        homePageModelList.add(new HomePageModel(3,"Products that you are looking for!",horizontalProductScrollModelList));
+        homePageModelList.add(new HomePageModel(3,"Hurry Up!",horizontalProductScrollModelList));
 
+        //homePageModelList.add(new HomePageModel(1,R.drawable.banner,"#000000"));
+        homePageModelList.add(new HomePageModel(2,"Deals of the Day",horizontalProductScrollModelList));
+        homePageModelList.add(new HomePageModel(3,"Products that you are looking for!",horizontalProductScrollModelList));
+        homePageModelList.add(new HomePageModel(3,"Hurry Up!",horizontalProductScrollModelList));
+
+        //homePageModelList.add(new HomePageModel(1,R.drawable.banner,"#000000"));
+        homePageModelList.add(new HomePageModel(2,"Deals of the Day",horizontalProductScrollModelList));
+        homePageModelList.add(new HomePageModel(3,"Products that you are looking for!",horizontalProductScrollModelList));
+        homePageModelList.add(new HomePageModel(3,"Hurry Up!",horizontalProductScrollModelList));
 
         ////////////Testing
 
@@ -130,11 +148,11 @@ public class HomeFragment1 extends Fragment {
         LinearLayoutManager testingLayoutManager= new LinearLayoutManager(getContext());
         testingLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         homePageRecyclerView.setLayoutManager(testingLayoutManager);
-        final List<HomePageModel>homePageModelList=new ArrayList<>();
+
+        //final List<HomePageModel>homePageModelList=new ArrayList<>();
         adapter=new HomePageAdapter(homePageModelList);
         homePageRecyclerView.setAdapter(adapter);
-
-        firebaseFirestore = FirebaseFirestore.getInstance();
+/*        firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseFirestore.collection("CATEGORIES").document("HOME").collection("TOP_DEALS").orderBy("index").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -166,7 +184,7 @@ public class HomeFragment1 extends Fragment {
                         }
                     }
                 });
-
+*/
 
         ////////////Testing
         return view;
