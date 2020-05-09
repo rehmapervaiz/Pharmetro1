@@ -35,10 +35,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     @Override
     public CategoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-       View view= LayoutInflater.from(mContext).inflate(R.layout.category_item,parent,false);
+        View view= LayoutInflater.from(mContext).inflate(R.layout.category_item,parent,false);
 
         return new ViewHolder(view);
-      //   return null;
+        //   return null;
     }
 
 
@@ -82,8 +82,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                 public void onClick(View v) {
 
                     Intent categoryIntent=new Intent(itemView.getContext(),CategoryActivity.class);
-                   categoryIntent.putExtra("CategoryName",name);
-                   itemView.getContext().startActivity(categoryIntent);
+                    categoryIntent.putExtra("CategoryName",name);
+                    itemView.getContext().startActivity(categoryIntent);
 
                 }
             } );
