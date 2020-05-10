@@ -149,7 +149,6 @@ public class HomeFragment1 extends Fragment {
         /////////////Grid View
 
 
-        ////////////Testing
 
         homePageRecyclerView =view.findViewById(R.id.home_page_recyclerview);
         LinearLayoutManager testingLayoutManager= new LinearLayoutManager(getContext());
