@@ -1,6 +1,7 @@
 package com.example.pharmetroclient;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import com.bumptech.glide.request.RequestOptions;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.res.ColorStateListInflaterCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -26,6 +28,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import static android.graphics.Color.parseColor;
 
 public class HomePageAdapter extends RecyclerView.Adapter {
 
@@ -91,9 +95,10 @@ public class HomePageAdapter extends RecyclerView.Adapter {
                 ((StripAdBannerViewHolder) holder).setStripAd(resource, color);
                 break;
             case HomePageModel.HORIZONTAL_PRODUCT_VIEW:
+                String layoutColor=homePageModelList.get(position).getBackgroundColor();
                 String horizontal_Layout_Title = homePageModelList.get(position).getTitle();
                 List<HorizontalProductScrollModel> horizontalProductScrollModelList = homePageModelList.get(position).getHorizontalProductScrollModelList();
-                ((HorizontalProductViewHolder) holder).setHorizontalProductLayout(horizontalProductScrollModelList, horizontal_Layout_Title);
+                ((HorizontalProductViewHolder) holder).setHorizontalProductLayout(horizontalProductScrollModelList, horizontal_Layout_Title,layoutColor);
                 break;
             case HomePageModel.GRID_PRODUCT_VIEW:
                 String grid_Layout_Title = homePageModelList.get(position).getTitle();
@@ -241,11 +246,12 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
         private void setStripAd(String resource, String color) {
             Glide.with(itemView.getContext()).load(resource).apply(new RequestOptions().placeholder(R.drawable.home_icon)).into(stripAdImage);
-            stripAdContainer.setBackgroundColor(Color.parseColor(color));
+            stripAdContainer.setBackgroundColor(parseColor(color));
         }
     }
 
     public class HorizontalProductViewHolder extends RecyclerView.ViewHolder {
+        private ConstraintLayout container;
         private TextView horizontalLayoutTitle;
         private Button horizontalLayoutViewAllButton;
         private RecyclerView horizontalRecyclerView;
@@ -253,6 +259,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
         public HorizontalProductViewHolder(@NonNull View itemView) {
 
             super(itemView);
+            container=itemView.findViewById(R.id.container);
             horizontalLayoutTitle = itemView.findViewById(R.id.horizontal_scroll_layout_title);
             horizontalLayoutViewAllButton = itemView.findViewById(R.id.horizontal_scroll_view_all_button);
             horizontalRecyclerView = itemView.findViewById(R.id.horizontal_scroll_layout_recyclerview);
@@ -260,8 +267,9 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
         }
 
-        private void setHorizontalProductLayout(List<HorizontalProductScrollModel> horizontalProductScrollModelList, String title) {
+        private void setHorizontalProductLayout(List<HorizontalProductScrollModel> horizontalProductScrollModelList, String title,String color) {
 
+            //container.setBackgroundColor ( ColorStateListInflaterCompat.   .valueOf ( Color.parseColor ( color ) ) );
             horizontalLayoutTitle.setText(title);
             if (horizontalProductScrollModelList.size() > 8) {
                 horizontalLayoutViewAllButton.setVisibility(View.VISIBLE);
@@ -309,12 +317,12 @@ public class HomePageAdapter extends RecyclerView.Adapter {
                 TextView productDescription = gridProductLayout.getChildAt(x).findViewById(R.id.h_s_product_description);
                 TextView productPrice = gridProductLayout.getChildAt(x).findViewById(R.id.h_s_product_price);
 
-                productImage.setImageResource(horizontalProductScrollModelList.get(x).getProductImage());
-                productTitle.setText(horizontalProductScrollModelList.get(x).getProductTitle());
+              //  Glide.with(itemView.getContext()).load(horizontalProductScrollModelList.get());
+               productTitle.setText(horizontalProductScrollModelList.get(x).getProductTitle());
                 productDescription.setText(horizontalProductScrollModelList.get(x).getProductDescription());
                 productPrice.setText(horizontalProductScrollModelList.get(x).getProductPrice());
 
-                gridProductLayout.getChildAt(x).setBackgroundColor(Color.parseColor("ffffff"));
+                gridProductLayout.getChildAt(x).setBackgroundColor(parseColor("ffffff"));
 
                 gridProductLayout.getChildAt(x).setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -326,15 +334,16 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
 
             }
-
-          /*  gridLayoutViewAllButton.setOnClickListener(new View.OnClickListener() {
+            /* gridLayoutViewAllButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent ViewAllIntent = new Intent(itemView.getContext(),ViewAllActivity.class);
                     ViewAllIntent.putExtra("layout_coded",1);
                     itemView.getContext().startActivity(ViewAllIntent);
                 }
-            });*/
+            });
+
+             */
         }
     }
 

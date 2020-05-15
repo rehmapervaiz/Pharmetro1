@@ -141,7 +141,7 @@ public class HomeFragment1 extends Fragment {
         homePageModelList.add(new HomePageModel(2,"Deals of the Day",horizontalProductScrollModelList));
         homePageModelList.add(new HomePageModel(3,"Products that you are looking for!",horizontalProductScrollModelList));
         homePageModelList.add(new HomePageModel(3,"Hurry Up!",horizontalProductScrollModelList));
-
+*/
         ////////////Testing
 
         homePageRecyclerView =view.findViewById(R.id.home_page_recyclerview);
@@ -149,10 +149,10 @@ public class HomeFragment1 extends Fragment {
         testingLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         homePageRecyclerView.setLayoutManager(testingLayoutManager);
 
-        //final List<HomePageModel>homePageModelList=new ArrayList<>();
+        final List<HomePageModel>homePageModelList=new ArrayList<>();
         adapter=new HomePageAdapter(homePageModelList);
         homePageRecyclerView.setAdapter(adapter);
-/*        firebaseFirestore = FirebaseFirestore.getInstance();
+    // firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseFirestore.collection("CATEGORIES").document("HOME").collection("TOP_DEALS").orderBy("index").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -171,6 +171,18 @@ public class HomeFragment1 extends Fragment {
                                     homePageModelList.add(new HomePageModel(1,documentSnapshot.get("strip_ad_banner").toString(),documentSnapshot.get("background").toString()));
 
                                 }else if((long)documentSnapshot.get("view_type")==2){
+                                    List<HorizontalProductScrollModel>horizontalProductScrollModelList=new ArrayList<>();
+                                    long no_of_products =(long) documentSnapshot.get("no_of_products");
+
+                                    for(long x = 1; x < no_of_products + 1; x++){
+                                        horizontalProductScrollModelList.add(new HorizontalProductScrollModel(documentSnapshot.get("product_ID_"+x).toString()
+                                                ,documentSnapshot.get("product_image_"+x).toString()
+                                                ,documentSnapshot.get("product_title_"+x).toString()
+                                                ,documentSnapshot.get("product_subtitle_"+x).toString()
+                                                ,documentSnapshot.get("product_price_"+x).toString()));
+                                    }
+                                    homePageModelList.add(new HomePageModel(2,documentSnapshot.get("layout_title").toString(),documentSnapshot.get("layout_background").toString(),horizontalProductScrollModelList));
+
 
                                 }else if((long)documentSnapshot.get("view_type")==3){
 
@@ -184,7 +196,9 @@ public class HomeFragment1 extends Fragment {
                         }
                     }
                 });
-*/
+
+
+
 
         ////////////Testing
         return view;
