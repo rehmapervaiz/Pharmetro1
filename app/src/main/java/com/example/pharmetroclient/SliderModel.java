@@ -13,6 +13,7 @@ public class SliderModel {
     }
 
 
+
     public String getBanner() {
         return banner;
     }

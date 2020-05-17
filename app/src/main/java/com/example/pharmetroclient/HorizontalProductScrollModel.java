@@ -1,25 +1,34 @@
 package com.example.pharmetroclient;
 
 public class HorizontalProductScrollModel {
-
-    private int productImage;
+    private String productID;
+    private String produceImage;
     private String ProductTitle;
     private String ProductDescription;
     private String ProductPrice;
 
-    public HorizontalProductScrollModel(int productImage, String productTitle, String productDescription, String productPrice) {
-        this.productImage = productImage;
-        ProductTitle = productTitle;
-        ProductDescription = productDescription;
-        ProductPrice = productPrice;
+    public HorizontalProductScrollModel(String productID,String produceImage, String productTitle, String productDescription, String productPrice) {
+        this.produceImage = produceImage;
+        this.productID=productID;
+        this.ProductTitle = productTitle;
+        this.ProductDescription = productDescription;
+        this.ProductPrice = productPrice;
     }
 
-    public int getProductImage() {
-        return productImage;
+    public String getProductID() {
+        return productID;
     }
 
-    public void setProductImage(int productImage) {
-        this.productImage = productImage;
+    public void setProductID(String productID) {
+        this.productID = productID;
+    }
+
+    public String getProduceImage() {
+        return produceImage;
+    }
+
+    public void setProduceImage(String produceImage) {
+        this.produceImage = produceImage;
     }
 
     public String getProductTitle() {
