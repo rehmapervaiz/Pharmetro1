@@ -17,6 +17,7 @@ public class ViewAllActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private GridView gridView;
+    public static List<HorizontalProductScrollModel> horizontalProductScrollModelList;
 
 
    // just trying to commit
@@ -29,7 +30,7 @@ public class ViewAllActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setTitle("Deals of the day");
+        getSupportActionBar().setTitle(getIntent().getStringExtra("title"));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         recyclerView = findViewById(R.id.recycler_view);
@@ -63,29 +64,8 @@ public class ViewAllActivity extends AppCompatActivity {
         }else if(layout_code==1) {
 
             gridView.setVisibility(View.VISIBLE);
-            List<HorizontalProductScrollModel> horizontalProductScrollModelList = new ArrayList<>();
-       /*     horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.med1, "Orthix ", "500mg Film-Coated Tablets", "Rs. 320"));
-            horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.med2, "Ibuprofen ", "200mg", "Rs.420"));
-            horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.panadol, "Panadol ", "500mg", "Rs.700"));
-            horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.med3, "Advil ", "200mg", "Rs.1120"));
-            horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.med4, "VoltrenT ", "25mg", "Rs.70"));
-            horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.med5, "BioLine ", "500mg", "Rs.120"));
-            horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.med6, "Omega 3 ", "500mg", "Rs.700"));
-            horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.med7, "New Chapter ", "25mg", "Rs.70"));
-            horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.med8, "Collagen ", "500mg", "Rs.620"));
-            horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.panadol, "Panadol ", "500mg", "Rs.700"));
-            horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.med1, "Orthix ", "500mg Film-Coated Tablets", "Rs. 320"));
-            horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.med2, "Ibuprofen ", "200mg", "Rs.420"));
-            horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.panadol, "Panadol ", "500mg", "Rs.700"));
-            horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.med3, "Advil ", "200mg", "Rs.1120"));
-            horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.med4, "VoltrenT ", "25mg", "Rs.70"));
-            horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.med5, "BioLine ", "500mg", "Rs.120"));
-            horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.med6, "Omega 3 ", "500mg", "Rs.700"));
-            horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.med7, "New Chapter ", "25mg", "Rs.70"));
-            horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.med8, "Collagen ", "500mg", "Rs.620"));
-            horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.panadol, "Panadol ", "500mg", "Rs.700"));
 
-*/
+
             GridProductLayoutAdapter gridProductLayoutAdapter = new GridProductLayoutAdapter(horizontalProductScrollModelList);
             gridView.setAdapter(gridProductLayoutAdapter);
         }
