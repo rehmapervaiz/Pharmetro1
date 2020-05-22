@@ -1,7 +1,10 @@
 package com.example.pharmetroclient;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,9 +26,12 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.bumptech.glide.Glide;
 import com.example.pharmetroclient.ui.home.HomeFragment;
 import com.google.android.material.navigation.NavigationView;
 
+import static com.example.pharmetroclient.DBqueries.categoryModelList;
+import static com.example.pharmetroclient.DBqueries.loadCatagories;
 import static com.example.pharmetroclient.RegisterActivity.setSignUpFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -43,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ImageView actionBarLogo;
     private  int currentFragment = -1;
     private NavigationView navigationView;
+    private ImageView noInternetConnection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,18 +86,40 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.getMenu().getItem(0).setChecked(true);
 
         frameLayout=findViewById(R.id.main_frame_layout);
-        if (showCart){
-            drawer.setDrawerLockMode(1);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-         gotoFragment("My Cart",new MyCartFragment(),-2);
+
+
+        noInternetConnection = findViewById(R.id.no_internet_connection);
+
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        if(networkInfo != null && networkInfo.isConnected() == true) {
+            noInternetConnection.setVisibility(View.GONE);
+
+
+            if (showCart) {
+                drawer.setDrawerLockMode(1);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                gotoFragment("My Cart", new MyCartFragment(), -2);
+            } else {
+                ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                        this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                drawer.addDrawerListener(toggle);
+                toggle.syncState();
+                setFragment(new HomeFragment1(), HOME_FRAGMENT);
+            }
+
+
+
+        }else {
+            Glide.with(this).load(R.drawable.no_internet_connection).into(noInternetConnection);
+            noInternetConnection.setVisibility(View.VISIBLE);
+
         }
-        else{
-            ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(
-                    this,drawer,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
-            drawer.addDrawerListener(toggle);
-            toggle.syncState();
-            setFragment(new HomeFragment1(),HOME_FRAGMENT);
-        }
+
+
+
+
 
     }
 

@@ -101,9 +101,10 @@ public class HomePageAdapter extends RecyclerView.Adapter {
                 ((HorizontalProductViewHolder) holder).setHorizontalProductLayout(horizontalProductScrollModelList, horizontal_Layout_Title,layoutColor);
                 break;
             case HomePageModel.GRID_PRODUCT_VIEW:
+                String gridlayoutColor=homePageModelList.get(position).getBackgroundColor();
                 String grid_Layout_Title = homePageModelList.get(position).getTitle();
                 List<HorizontalProductScrollModel> gridProductScrollModelList = homePageModelList.get(position).getHorizontalProductScrollModelList();
-                ((GridProductViewHolder) holder).setGridProductLayout(gridProductScrollModelList, grid_Layout_Title);
+                ((GridProductViewHolder) holder).setGridProductLayout(gridProductScrollModelList, grid_Layout_Title,gridlayoutColor);
                 break;
             default:
                 return;
@@ -297,18 +298,21 @@ public class HomePageAdapter extends RecyclerView.Adapter {
     }
 
     public class GridProductViewHolder extends RecyclerView.ViewHolder{
+        private ConstraintLayout container;
         private TextView gridLayoutTitle;
         private Button gridLayoutViewAllButton;
         private GridLayout gridProductLayout;
 
         public GridProductViewHolder(@NonNull View itemView) {
             super(itemView);
+            container = itemView.findViewById(R.id.container);
             gridLayoutTitle=itemView.findViewById(R.id.grid_product_layout_title);
             gridLayoutViewAllButton=itemView.findViewById(R.id.grid_product_layout_view_all_button);
             gridProductLayout= itemView.findViewById(R.id.grid_layout);
         }
 
-        private void setGridProductLayout(List<HorizontalProductScrollModel>horizontalProductScrollModelList,String title){
+        private void setGridProductLayout(final List<HorizontalProductScrollModel>horizontalProductScrollModelList, final String title, String color){
+            container.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(color)));
             gridLayoutTitle.setText(title);
 
             for (int x=0 ; x<4 ; x++){
@@ -317,10 +321,10 @@ public class HomePageAdapter extends RecyclerView.Adapter {
                 TextView productDescription = gridProductLayout.getChildAt(x).findViewById(R.id.h_s_product_description);
                 TextView productPrice = gridProductLayout.getChildAt(x).findViewById(R.id.h_s_product_price);
 
-              //  Glide.with(itemView.getContext()).load(horizontalProductScrollModelList.get());
+                Glide.with(itemView.getContext()).load(horizontalProductScrollModelList.get(x).getProduceImage()).apply(new RequestOptions().placeholder(R.drawable.home_icon)).into(productImage);
                productTitle.setText(horizontalProductScrollModelList.get(x).getProductTitle());
                 productDescription.setText(horizontalProductScrollModelList.get(x).getProductDescription());
-                productPrice.setText(horizontalProductScrollModelList.get(x).getProductPrice());
+                productPrice.setText("Rs."+horizontalProductScrollModelList.get(x).getProductPrice()+"/-");
 
                 gridProductLayout.getChildAt(x).setBackgroundColor(parseColor("ffffff"));
 
@@ -334,16 +338,18 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
 
             }
-            /* gridLayoutViewAllButton.setOnClickListener(new View.OnClickListener() {
+            gridLayoutViewAllButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    ViewAllActivity.horizontalProductScrollModelList = horizontalProductScrollModelList;
                     Intent ViewAllIntent = new Intent(itemView.getContext(),ViewAllActivity.class);
                     ViewAllIntent.putExtra("layout_coded",1);
+                    ViewAllIntent.putExtra("title",title);
                     itemView.getContext().startActivity(ViewAllIntent);
                 }
             });
 
-             */
+
         }
     }
 
