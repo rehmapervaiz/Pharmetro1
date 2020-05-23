@@ -1,47 +1,49 @@
 package com.example.pharmetroclient;
 
 public class WishListModel {
-    private int productImage;
-    private int totalRatings;
-    private int freeCoupens;
+    private String productImage;
+    private String productTitle;
+    private long freeCoupens;
     private String rating;
+    private long totalRatings;
     private String productPrice;
     private String cuttedPrice;
-    private String paymentMethod;
-    private String productTitle;
+    private boolean COD;
 
-    public WishListModel(int productImage, String productTitle, int freeCoupens, String rating, int totalRatings, String productPrice, String cuttedPrice, String paymentMethod) {
+
+    public WishListModel(String productImage, String productTitle, long freeCoupens,String rating, long totalRatings, String productPrice, String cuttedPrice, boolean COD) {
         this.productImage = productImage;
-        this.totalRatings = totalRatings;
+        this.productTitle = productTitle;
         this.freeCoupens = freeCoupens;
         this.rating = rating;
+        this.totalRatings = totalRatings;
         this.productPrice = productPrice;
         this.cuttedPrice = cuttedPrice;
-        this.paymentMethod = paymentMethod;
-        this.productTitle = productTitle;
+        this.COD = COD;
+
     }
 
-    public int getProductImage() {
+    public String getProductImage() {
         return productImage;
     }
 
-    public void setProductImage(int productImage) {
+    public void setProductImage(String productImage) {
         this.productImage = productImage;
     }
 
-    public int getTotalRatings() {
-        return totalRatings;
+    public String getProductTitle() {
+        return productTitle;
     }
 
-    public void setTotalRatings(int totalRatings) {
-        this.totalRatings = totalRatings;
+    public void setProductTitle(String productTitle) {
+        this.productTitle = productTitle;
     }
 
-    public int getFreeCoupens() {
+    public long getFreeCoupens() {
         return freeCoupens;
     }
 
-    public void setFreeCoupens(int freeCoupens) {
+    public void setFreeCoupens(long freeCoupens) {
         this.freeCoupens = freeCoupens;
     }
 
@@ -53,6 +55,14 @@ public class WishListModel {
         this.rating = rating;
     }
 
+    public long getTotalRatings() {
+        return totalRatings;
+    }
+
+    public void setTotalRatings(long totalRatings) {
+        this.totalRatings = totalRatings;
+    }
+
     public String getProductPrice() {
         return productPrice;
     }
@@ -60,6 +70,7 @@ public class WishListModel {
     public void setProductPrice(String productPrice) {
         this.productPrice = productPrice;
     }
+
 
     public String getCuttedPrice() {
         return cuttedPrice;
@@ -69,19 +80,13 @@ public class WishListModel {
         this.cuttedPrice = cuttedPrice;
     }
 
-    public String getPaymentMethod() {
-        return paymentMethod;
+    public boolean isCOD() {
+        return COD;
     }
 
-    public void setPaymentMethod(String paymentMethod) {
-        this.paymentMethod = paymentMethod;
+    public void setCOD(boolean COD) {
+        this.COD = COD;
     }
 
-    public String getProductTitle() {
-        return productTitle;
-    }
 
-    public void setProductTitle(String productTitle) {
-        this.productTitle = productTitle;
-    }
 }

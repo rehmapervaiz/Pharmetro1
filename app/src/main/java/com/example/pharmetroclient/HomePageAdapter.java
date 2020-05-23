@@ -97,8 +97,9 @@ public class HomePageAdapter extends RecyclerView.Adapter {
             case HomePageModel.HORIZONTAL_PRODUCT_VIEW:
                 String layoutColor=homePageModelList.get(position).getBackgroundColor();
                 String horizontal_Layout_Title = homePageModelList.get(position).getTitle();
+                List<WishListModel> viewAllProductList = homePageModelList.get(position).getViewAllProductList();
                 List<HorizontalProductScrollModel> horizontalProductScrollModelList = homePageModelList.get(position).getHorizontalProductScrollModelList();
-                ((HorizontalProductViewHolder) holder).setHorizontalProductLayout(horizontalProductScrollModelList, horizontal_Layout_Title,layoutColor);
+                ((HorizontalProductViewHolder) holder).setHorizontalProductLayout(horizontalProductScrollModelList, horizontal_Layout_Title,layoutColor,viewAllProductList);
                 break;
             case HomePageModel.GRID_PRODUCT_VIEW:
                 String gridlayoutColor=homePageModelList.get(position).getBackgroundColor();
@@ -268,7 +269,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
         }
 
-        private void setHorizontalProductLayout(List<HorizontalProductScrollModel> horizontalProductScrollModelList, String title,String color) {
+        private void setHorizontalProductLayout(List<HorizontalProductScrollModel> horizontalProductScrollModelList, final String title, String color, final List<WishListModel> viewAllProductList) {
 
             //container.setBackgroundColor ( ColorStateListInflaterCompat.   .valueOf ( Color.parseColor ( color ) ) );
             horizontalLayoutTitle.setText(title);
@@ -277,9 +278,11 @@ public class HomePageAdapter extends RecyclerView.Adapter {
                 horizontalLayoutViewAllButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                  //      Intent ViewAllIntent = new Intent(itemView.getContext(),ViewAllActivity.class);
-                  //      ViewAllIntent.putExtra("layout_coded",0);
-                  //      itemView.getContext().startActivity(ViewAllIntent);
+                        ViewAllActivity.wishListModelList = viewAllProductList;
+                       Intent ViewAllIntent = new Intent(itemView.getContext(),ViewAllActivity.class);
+                       ViewAllIntent.putExtra("layout_code",0);
+                        ViewAllIntent.putExtra("title",title);
+                       itemView.getContext().startActivity(ViewAllIntent);
                     }
                 });
 

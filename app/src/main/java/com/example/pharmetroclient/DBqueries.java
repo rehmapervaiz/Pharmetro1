@@ -60,6 +60,9 @@ public class DBqueries {
                                     homePageModelList.add(new HomePageModel(1,documentSnapshot.get("strip_ad_banner").toString(),documentSnapshot.get("background").toString()));
 
                                 }else if((long)documentSnapshot.get("view_type")==2){
+
+
+                                      List<WishListModel> viwAllProductList = new ArrayList<>();
                                     List<HorizontalProductScrollModel>horizontalProductScrollModelList=new ArrayList<>();
                                     long no_of_products =(long) documentSnapshot.get("no_of_products");
 
@@ -69,8 +72,19 @@ public class DBqueries {
                                                 ,documentSnapshot.get("product_title_"+x).toString()
                                                 ,documentSnapshot.get("product_subtitle_"+x).toString()
                                                 ,documentSnapshot.get("product_price_"+x).toString()));
+
+                                        viwAllProductList.add(new WishListModel(documentSnapshot.get("product_image_"+x).toString()
+                                                ,documentSnapshot.get("product_full_title_"+x).toString()
+                                                ,(long)documentSnapshot.get("free_coupens_"+x)
+                                                ,documentSnapshot.get("average_rating_"+x).toString()
+                                                ,(long)documentSnapshot.get("total_ratings_"+x)
+                                                ,documentSnapshot.get("product_price_"+x).toString()
+                                                ,documentSnapshot.get("cutted_price_"+x).toString()
+                                                ,(boolean)documentSnapshot.get("COD_"+x)));
+
+
                                     }
-                                    homePageModelList.add(new HomePageModel(2,documentSnapshot.get("layout_title").toString(),documentSnapshot.get("layout_background").toString(),horizontalProductScrollModelList));
+                                    homePageModelList.add(new HomePageModel(2,documentSnapshot.get("layout_title").toString(),documentSnapshot.get("layout_background").toString(),horizontalProductScrollModelList,viwAllProductList));
 
 
                                 }else if((long)documentSnapshot.get("view_type")==3){

@@ -18,6 +18,7 @@ public class ViewAllActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private GridView gridView;
     public static List<HorizontalProductScrollModel> horizontalProductScrollModelList;
+    public static List<WishListModel> wishListModelList;
 
 
    // just trying to commit
@@ -45,17 +46,7 @@ public class ViewAllActivity extends AppCompatActivity {
             recyclerView.setLayoutManager(layoutManager);
 
 
-            List<WishListModel> wishListModelList = new ArrayList<>();
-            wishListModelList.add(new WishListModel(R.drawable.panadol, "panaadol", 1, "3", 145, "Rs. 234/-", "Rs. 654/-", "cash on delivery"));
-            wishListModelList.add(new WishListModel(R.drawable.panadol, "panaadol", 0, "3", 145, "Rs. 234/-", "Rs. 654/-", "cash on delivery"));
-            wishListModelList.add(new WishListModel(R.drawable.panadol, "panaadol", 2, "3", 145, "Rs. 234/-", "Rs. 654/-", "cash on delivery"));
-            wishListModelList.add(new WishListModel(R.drawable.panadol, "panaadol", 4, "3", 145, "Rs. 234/-", "Rs. 654/-", "cash on delivery"));
-            wishListModelList.add(new WishListModel(R.drawable.panadol, "panaadol", 1, "3", 145, "Rs. 234/-", "Rs. 654/-", "cash on delivery"));
-            wishListModelList.add(new WishListModel(R.drawable.panadol, "panaadol", 1, "3", 145, "Rs. 234/-", "Rs. 654/-", "cash on delivery"));
-            wishListModelList.add(new WishListModel(R.drawable.panadol, "panaadol", 0, "3", 145, "Rs. 234/-", "Rs. 654/-", "cash on delivery"));
-            wishListModelList.add(new WishListModel(R.drawable.panadol, "panaadol", 2, "3", 145, "Rs. 234/-", "Rs. 654/-", "cash on delivery"));
-            wishListModelList.add(new WishListModel(R.drawable.panadol, "panaadol", 4, "3", 145, "Rs. 234/-", "Rs. 654/-", "cash on delivery"));
-            wishListModelList.add(new WishListModel(R.drawable.panadol, "panaadol", 1, "3", 145, "Rs. 234/-", "Rs. 654/-", "cash on delivery"));
+
 
 
             WishListAdapter adapter = new WishListAdapter(wishListModelList, false);
