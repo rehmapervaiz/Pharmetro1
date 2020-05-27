@@ -9,12 +9,20 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import static com.example.pharmetroclient.DBqueries.categoryModelList;
+import static com.example.pharmetroclient.DBqueries.lists;
+import static com.example.pharmetroclient.DBqueries.loadCatagories;
+import static com.example.pharmetroclient.DBqueries.loadFragmentData;
+import static com.example.pharmetroclient.DBqueries.loadedCategoriesNames;
+
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryActivity extends AppCompatActivity {
 
     private RecyclerView categoryRecyclerView;
+    private HomePageAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,12 +71,27 @@ public class CategoryActivity extends AppCompatActivity {
         testingLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         categoryRecyclerView.setLayoutManager(testingLayoutManager);
 
-        List<HomePageModel>homePageModelList=new ArrayList<>();
 
 
+        int listPosition = 0;
 
+       for(int x=0 ; x < loadedCategoriesNames.size() ; x++ )
+       {
+           if(loadedCategoriesNames.get(x).equals(title.toUpperCase())){
+               listPosition = x;
 
-        HomePageAdapter adapter=new HomePageAdapter(homePageModelList);
+           }
+       }
+       if(listPosition == 0){
+           loadedCategoriesNames.add(title.toUpperCase());
+           lists.add(new ArrayList<HomePageModel>());
+           adapter = new HomePageAdapter(lists.get(loadedCategoriesNames.size() - 1));
+           loadFragmentData(adapter, this, loadedCategoriesNames.size() - 1,title);
+       }
+       else{
+           adapter = new HomePageAdapter(lists.get(listPosition));
+       }
+
         categoryRecyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 

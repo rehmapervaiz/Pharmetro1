@@ -27,9 +27,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.pharmetroclient.DBqueries.categoryModelList;
-import static com.example.pharmetroclient.DBqueries.homePageModelList;
+import static com.example.pharmetroclient.DBqueries.lists;
 import static com.example.pharmetroclient.DBqueries.loadCatagories;
 import static com.example.pharmetroclient.DBqueries.loadFragmentData;
+import static com.example.pharmetroclient.DBqueries.loadedCategoriesNames;
 
 
 /**
@@ -56,23 +57,21 @@ public class HomeFragment1 extends Fragment {
 
 
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_home_fragment1, container, false);
+        View view = inflater.inflate(R.layout.fragment_home_fragment1, container, false);
 
 
+        categoryRecyclerView = view.findViewById(R.id.category_recyclerview);
 
-
-        categoryRecyclerView=view.findViewById(R.id.category_recyclerview);
-
-        LinearLayoutManager layoutManager=new LinearLayoutManager(getActivity());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         categoryRecyclerView.setLayoutManager(layoutManager);
 
-        categoryAdapter = new CategoryAdapter(categoryModelList,this.getActivity());
+        categoryAdapter = new CategoryAdapter(categoryModelList, this.getActivity());
         categoryRecyclerView.setAdapter(categoryAdapter);
 
-        if(categoryModelList.size() == 0){
-            loadCatagories(categoryAdapter,getContext());
-        }else {
+        if (categoryModelList.size() == 0) {
+            loadCatagories(categoryAdapter, getContext());
+        } else {
             categoryAdapter.notifyDataSetChanged();
         }
 
@@ -80,14 +79,20 @@ public class HomeFragment1 extends Fragment {
         LinearLayoutManager testingLayoutManager = new LinearLayoutManager(getContext());
         testingLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         homePageRecyclerView.setLayoutManager(testingLayoutManager);
-        adapter = new HomePageAdapter(homePageModelList);
+
+
+        if (lists.size() == 0) {
+            loadedCategoriesNames.add("HOME");
+            lists.add(new ArrayList<HomePageModel>());
+            adapter = new HomePageAdapter(lists.get(0));
+            loadFragmentData(adapter, getContext(), 0,"Home");
+        } else {
+            adapter = new HomePageAdapter(lists.get(0));
+            adapter.notifyDataSetChanged();
+        }
         homePageRecyclerView.setAdapter(adapter);
 
-        if(homePageModelList.size() == 0){
-            loadFragmentData(adapter,getContext());
-        }else {
-            categoryAdapter.notifyDataSetChanged();
-        }
+
 
 
 
