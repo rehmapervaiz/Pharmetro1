@@ -42,7 +42,7 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ViewHo
         String title = wishListModelList.get(position).getProductTitle();
         long freeCoupens = wishListModelList.get(position).getFreeCoupens();
         String rating = wishListModelList.get(position).getRating();
-        long totalRatings = wishListModelList.get(position).getTotalRatings();
+        String totalRatings = wishListModelList.get(position).getTotalRatings();
         String productPrice = wishListModelList.get(position).getProductPrice();
         String  cuttedPrice = wishListModelList.get(position).getCuttedPrice();
         boolean paymentMethod = wishListModelList.get(position).isCOD();
@@ -87,7 +87,7 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ViewHo
             deleteBtn = itemView.findViewById(R.id.delete_btn);
         }
 
-        private void setData(String resource, String title, long freeCoupensNo, String averageRate, long totalRatingsNo, String price, String cuttedPriceValue, boolean COD){
+        private void setData(String resource, String title, long freeCoupensNo, String averageRate, String totalRatingsNo, String price, String cuttedPriceValue, boolean COD){
             Glide.with(itemView.getContext()).load(resource).apply(new RequestOptions().placeholder(R.drawable.home_icon2)).into(productImage);
             productTitle.setText(title);
             if (freeCoupensNo != 0){
