@@ -79,7 +79,7 @@ public class DBqueries {
                                                 ,documentSnapshot.get("product_full_title_"+x).toString()
                                                 ,(long)documentSnapshot.get("free_coupens_"+x)
                                                 ,documentSnapshot.get("average_rating_"+x).toString()
-                                                ,(long)documentSnapshot.get("total_ratings_"+x)
+                                                ,documentSnapshot.get("total_ratings_"+x).toString()
                                                 ,documentSnapshot.get("product_price_"+x).toString()
                                                 ,documentSnapshot.get("cutted_price_"+x).toString()
                                                 ,(boolean)documentSnapshot.get("COD_"+x)));
