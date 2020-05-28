@@ -5,13 +5,13 @@ public class WishListModel {
     private String productTitle;
     private long freeCoupens;
     private String rating;
-    private long totalRatings;
+    private String totalRatings;
     private String productPrice;
     private String cuttedPrice;
     private boolean COD;
 
 
-    public WishListModel(String productImage, String productTitle, long freeCoupens,String rating, long totalRatings, String productPrice, String cuttedPrice, boolean COD) {
+    public WishListModel(String productImage, String productTitle, long freeCoupens,String rating, String totalRatings, String productPrice, String cuttedPrice, boolean COD) {
         this.productImage = productImage;
         this.productTitle = productTitle;
         this.freeCoupens = freeCoupens;
@@ -55,11 +55,11 @@ public class WishListModel {
         this.rating = rating;
     }
 
-    public long getTotalRatings() {
+    public String getTotalRatings() {
         return totalRatings;
     }
 
-    public void setTotalRatings(long totalRatings) {
+    public void setTotalRatings(String totalRatings) {
         this.totalRatings = totalRatings;
     }
 
