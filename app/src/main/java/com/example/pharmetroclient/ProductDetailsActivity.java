@@ -13,15 +13,21 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +37,18 @@ import static com.example.pharmetroclient.MainActivity.showCart;
 public class ProductDetailsActivity extends AppCompatActivity {
 
     private ViewPager productImagesViewPager;
+    private TextView productTitle;
+    private TextView averageRatingMiniView;
+    private TextView totalRatingMiniView;
+    private TextView productPrice;
+    private TextView cuttedPrice;
+    private TextView tvCodIndicator;
+    private ImageView codIndicator;
+
+    private TextView rewardTitle;
+    private TextView rewardBody;
+
+
     private TabLayout viewpagerIndicator;
     private Button couponRedeemBtn;
 
@@ -41,10 +59,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
     public static TextView couponExpiryDate;
     private static RecyclerView couponsRecyclerView;
     private static LinearLayout selectedCoupon;
-
-
-
-
 
     /////////////COUPON DIALOG////////////////////////////////
 
@@ -58,6 +72,9 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private  LinearLayout rateNowContainer;
     /////////////////// Rating layout
     private Button buyNowBtn;
+
+    private FirebaseFirestore firebaseFirestore;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,16 +92,63 @@ public class ProductDetailsActivity extends AppCompatActivity {
         productDetailsTablayout=findViewById(R.id.product_details_tablayout);
         buyNowBtn = findViewById(R.id.buy_now_btn);
         couponRedeemBtn=findViewById(R.id.coupon_redemption_btn);
+        productTitle= findViewById(R.id.product_title);
+        averageRatingMiniView= findViewById(R.id.tv_product_rating_miniview);
+        totalRatingMiniView= findViewById(R.id.total_ratings_miniview);
+        productPrice = findViewById(R.id.product_price);
+        cuttedPrice= findViewById(R.id.cutted_price);
+        codIndicator = findViewById(R.id.cod_indicator_imageview);
+        tvCodIndicator = findViewById(R.id.tv_product_rating_miniview);
+        rewardTitle = findViewById(R.id.reward_title);
+        rewardBody = findViewById(R.id.reward_body);
 
-        List<Integer> productImages = new ArrayList<>();
-        productImages.add(R.drawable.panadol);
-        productImages.add(R.drawable.logo);
-        productImages.add(R.drawable.logo1);
-        productImages.add(R.drawable.banner);
-        productImages.add(R.drawable.panadol);
 
-        ProductImagesAdapter productImagesAdapter = new ProductImagesAdapter(productImages);
-        productImagesViewPager.setAdapter(productImagesAdapter);
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        final List<String> productImages = new ArrayList<>();
+
+        firebaseFirestore.collection("PRODUCTS").document("nRAWXgDdYsAuppDBCZYG")
+                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()){
+                    DocumentSnapshot documentSnapshot = task.getResult();
+
+                    for ( long x = 1 ; x < (long)documentSnapshot.get("no_of_product_images") + 1 ; x++ ){
+                        productImages.add(documentSnapshot.get("product_image_"+x).toString());
+                    }
+
+                    ProductImagesAdapter productImagesAdapter = new ProductImagesAdapter(productImages);
+                    productImagesViewPager.setAdapter(productImagesAdapter);
+
+                    productTitle.setText(documentSnapshot.get("product_title").toString());
+                    averageRatingMiniView.setText(documentSnapshot.get("average_rating").toString());
+                    totalRatingMiniView.setText("("+(long)documentSnapshot.get("total_ratings")+")ratings");
+                    productPrice.setText("Rs. "+documentSnapshot.get("product_price").toString()+"/-");
+                    cuttedPrice.setText("Rs. "+documentSnapshot.get("cutted_price").toString()+"/-");
+                    if ((boolean)documentSnapshot.get("COD")){
+                        codIndicator.setVisibility(View.VISIBLE);
+                        tvCodIndicator.setVisibility(View.VISIBLE);
+                    }else {
+                        codIndicator.setVisibility(View.INVISIBLE);
+                        tvCodIndicator.setVisibility(View.INVISIBLE);
+                    }
+
+                    rewardTitle.setText((long)documentSnapshot.get("free_coupens") + documentSnapshot.get("free_coupen_title").toString());
+                    rewardBody.setText(documentSnapshot.get("free_coupen_body").toString());
+                }else {
+                    String error = task.getException().getMessage();
+                    Toast.makeText(ProductDetailsActivity.this,error,Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+       // List<Integer> productImages = new ArrayList<>();
+        //productImages.add(R.drawable.panadol);
+        //productImages.add(R.drawable.logo);
+        //productImages.add(R.drawable.logo1);
+        //productImages.add(R.drawable.banner);
+        //productImages.add(R.drawable.panadol);
 
         viewpagerIndicator.setupWithViewPager(productImagesViewPager, true);
 
