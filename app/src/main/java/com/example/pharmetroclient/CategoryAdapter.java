@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,6 +22,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     private List<CategoryModel>categoryModelList;
     private Context mContext;
+    private int lastPosition = -1;
 
     public CategoryAdapter(List<CategoryModel> categoryModelList) {
         this.categoryModelList = categoryModelList;
@@ -35,7 +38,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     @Override
     public CategoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view= LayoutInflater.from(mContext).inflate(R.layout.category_item,parent,false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.category_item,parent,false);
 
         return new ViewHolder(view);
         //   return null;
@@ -46,8 +49,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     public void onBindViewHolder(@NonNull CategoryAdapter.ViewHolder holder, int position) {
         String icon=categoryModelList.get(position).getCategoryIconLink();
         String name=categoryModelList.get(position).getCategoryName();
-        holder.setCategory(name);
+        holder.setCategory(name,position);
         holder.setCategoryIcon(icon);
+
+        if(lastPosition < position) {
+            Animation animation = AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.fade_in_left);
+            holder.itemView.setAnimation(animation);
+            lastPosition = position;
+        }
     }
 
     @Override
@@ -71,22 +80,28 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         }
         private void setCategoryIcon(String iconUrl){
             if(!iconUrl.equals("null")) {
-                Glide.with(itemView.getContext()).load(iconUrl).apply(new RequestOptions()).into(categoryIcon);
+                Glide.with(itemView.getContext()).load(iconUrl).apply(new RequestOptions().placeholder(R.drawable.icon_placeholder)).into(categoryIcon);
+            }else {
+                categoryIcon.setImageResource(R.drawable.home_icon);
             }
         }
-        private void setCategory(final String name){
+        private void setCategory(final String name,final int position){
             categoryName.setText(name);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+            if(!name.equals("")) {
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
-                    Intent categoryIntent=new Intent(itemView.getContext(),CategoryActivity.class);
-                    categoryIntent.putExtra("CategoryName",name);
-                    itemView.getContext().startActivity(categoryIntent);
+                        if(position!=0) {
+                            Intent categoryIntent = new Intent(itemView.getContext(), CategoryActivity.class);
+                            categoryIntent.putExtra("CategoryName", name);
+                            itemView.getContext().startActivity(categoryIntent);
+                        }
 
-                }
-            } );
+                    }
+                });
+            }
 
 
 

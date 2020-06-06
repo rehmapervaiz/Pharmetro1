@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 public class DBqueries {
     public static FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
@@ -22,7 +24,7 @@ public class DBqueries {
     public static List<String> loadedCategoriesNames = new ArrayList<>();
 
 
-    public static void loadCatagories(final CategoryAdapter categoryAdapter,final Context context) {
+    public static void loadCatagories(final RecyclerView categoryRecyclerView, final Context context) {
 
         firebaseFirestore.collection("CATEGORIES").orderBy("index").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -32,6 +34,8 @@ public class DBqueries {
                             for(QueryDocumentSnapshot documentSnapshot : task.getResult()){
                                 categoryModelList.add(new CategoryModel(documentSnapshot.get("icon").toString(),documentSnapshot.get("categoryName").toString()));
                             }
+                            CategoryAdapter categoryAdapter = new CategoryAdapter(categoryModelList);
+                            categoryRecyclerView.setAdapter(categoryAdapter);
                             categoryAdapter.notifyDataSetChanged();
 
                         }else {
@@ -43,7 +47,7 @@ public class DBqueries {
 
     }
 
-    public static void loadFragmentData(final HomePageAdapter adapter,final Context context , final int index, String categoryName){
+    public static void loadFragmentData(final RecyclerView homePageRecyclerView, final Context context , final int index, String categoryName){
         firebaseFirestore.collection("CATEGORIES").document(categoryName.toUpperCase()).collection("TOP_DEALS").orderBy("index").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -105,7 +109,11 @@ public class DBqueries {
 
                                 }
                             }
-                            adapter.notifyDataSetChanged();
+
+                            HomePageAdapter homePageAdapter = new HomePageAdapter(lists.get(index));
+                            homePageRecyclerView.setAdapter(homePageAdapter);
+                            homePageAdapter.notifyDataSetChanged();
+                            HomeFragment1.swipeRefreshLayout.setRefreshing(false);
 
                         }else {
                             String error = task.getException().getMessage();
