@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.GridLayout;
+import androidx.gridlayout.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -287,7 +287,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
                 horizontalLayoutViewAllButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        ViewAllActivity.wishListModelList = viewAllProductList;
+                       ViewAllActivity.wishListModelList=viewAllProductList;
                        Intent ViewAllIntent = new Intent(itemView.getContext(),ViewAllActivity.class);
                        ViewAllIntent.putExtra("layout_code",0);
                         ViewAllIntent.putExtra("title",title);
@@ -338,7 +338,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
                 productDescription.setText(horizontalProductScrollModelList.get(x).getProductDescription());
                 productPrice.setText("Rs."+horizontalProductScrollModelList.get(x).getProductPrice()+"/-");
 
-                gridProductLayout.getChildAt(x).setBackgroundColor(parseColor("ffffff"));
+                gridProductLayout.getChildAt(x).setBackgroundColor(parseColor("#ffffff"));
 
                 if(!title.equals("")) {
                     gridProductLayout.getChildAt(x).setOnClickListener(new View.OnClickListener() {

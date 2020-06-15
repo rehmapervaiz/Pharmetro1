@@ -149,10 +149,10 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
                     productTitle.setText ( documentSnapshot.get ( "product_title" ).toString () );
                     averageRatingMiniView.setText ( documentSnapshot.get ( "average_rating" ).toString () );
-                    totalRatingMiniView.setText ( "(" + (long) documentSnapshot.get ( "total_ratings" ) + ")ratings" );
-                    productPrice.setText ( "Rs. " + documentSnapshot.get ( "product_price" ).toString () + "/-" );
-                    cuttedPrice.setText ( "Rs. " + documentSnapshot.get ( "cutted_price" ).toString () + "/-" );
-                    if ((boolean) documentSnapshot.get ( "COD" )) {
+                    totalRatingMiniView.setText( "(" + documentSnapshot.get("total_ratings") + ")ratings" );
+                    productPrice.setText( "Rs. " + documentSnapshot.get("product_price").toString () + "/-" );
+                    cuttedPrice.setText( "Rs. " + documentSnapshot.get ("cutted_price").toString () + "/-" );
+                    if (documentSnapshot.get ( "COD" ).equals("true")) {
                         codIndicator.setVisibility ( View.VISIBLE );
                         tvCodIndicator.setVisibility ( View.INVISIBLE );
                     } else {
@@ -174,7 +174,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                            productSpecificationModelList.add ( new ProductSpecificationModel ( 0,documentSnapshot.get ( "spec_title_" +x ).toString ()) );
                            for (long y=1;y<(long)documentSnapshot.get("spec_title_"+x+"_total_fields")+1;y++) {
 
-                               productSpecificationModelList.add ( new ProductSpecificationModel ( 1, documentSnapshot.get ( "spec_title_"+x+"_field_"+y+"_name" ).toString (), documentSnapshot.get ( "spec_title_"+x+"_field_" +y+ "_value" ).toString () ) );
+                               productSpecificationModelList.add( new ProductSpecificationModel ( 1, documentSnapshot.get("spec_title_"+x+"_field_"+y+"_name").toString (), documentSnapshot.get( "spec_title_"+x+"_field_" +y+ "_value").toString()) );
 
                            }
 
@@ -186,18 +186,18 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
                     }
 
-                    totalRatings.setText ( (long)documentSnapshot.get ( "total_ratings" )+"ratings" );
+                    totalRatings.setText ( documentSnapshot.get ( "total_ratings" )+"ratings" );
                     for (int x=1;x<5;x++){
                         TextView rating= (TextView) ratingsNoContainer.getChildAt ( x );
-                        rating.setText ( String.valueOf ((long)documentSnapshot.get ( (5-x)+"_star" )));
+                        rating.setText ( String.valueOf (documentSnapshot.get( (5-x)+"_star" )));
 
                         ProgressBar progressBar= (ProgressBar) ratingsProgressBarContainer.getChildAt ( x );
-                        int maxProgress = Integer.parseInt(String.valueOf ((long)documentSnapshot.get ( "total_ratings" )));
+                        int maxProgress = Integer.parseInt(String.valueOf (documentSnapshot.get ( "total_ratings" )));
                         progressBar.setMax (maxProgress);
-                        progressBar.setProgress (Integer.parseInt ( String.valueOf ((long)documentSnapshot.get ( (5-x)+"_star" ))));
+                        progressBar.setProgress (Integer.parseInt ( String.valueOf (documentSnapshot.get ( (5-x)+"_star" ))));
 
                     }
-                    totalRatingsFigure.setText (  String.valueOf ((long)documentSnapshot.get ( "total_ratings" )));
+                    totalRatingsFigure.setText (  String.valueOf (documentSnapshot.get ( "total_ratings" )));
                     averageRating.setText (  documentSnapshot.get ( "average_rating" ).toString () );
                     productDetailsViewpager.setAdapter ( new ProductDetailsAdapter ( getSupportFragmentManager (), productDetailsTablayout.getTabCount (),productDescription,productOtherDetails,productSpecificationModelList ) );
 
